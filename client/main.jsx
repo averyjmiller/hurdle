@@ -2,16 +2,17 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.jsx";
-import Home from "./pages/home.jsx";
-import Profile from "./pages/profile.jsx";
-import Signup from "./pages/signup.jsx";
-import Login from "./pages/login.jsx";
+import Home from "./src/pages/pages/home.jsx";
+import Profile from "./src/pages/pages/";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import ErrorPage from "./pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
