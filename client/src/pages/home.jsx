@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import customButton from 'hurdle\app.css';
+import customButton from 'hurdle\client\src\App.css';
 
 function HomePage() {
   return (
@@ -9,8 +9,8 @@ function HomePage() {
       <p>Start messaging with people around the world</p>
       
       {/* "Start Messaging" button */}
-      <Link to="/messaging">
-        <button>Start Messaging</button>
+      <Link to="hurdle\client\src\pages\signup.jsx">
+        <button>Get Started</button>
       </Link>
     </div>
   );
