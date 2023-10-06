@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './CustomButton.css';
+import 'hurdle/app.css';
 
 function CustomButton({ buttonText }) {
   return (
