@@ -6,7 +6,9 @@ function LoginPage() {
   return (
     <div>
       <h1>Signin Page</h1>
-      <customButton />
+
+      <customButton>Sign In</customButton>
+
     </div>
   );
 }
