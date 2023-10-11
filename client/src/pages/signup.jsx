@@ -1,6 +1,7 @@
 // SignupPage.jsx (Presentation Component)
-import React, { useState } from 'react';
-import SignupForm from './SignupForm'; // Import the form component
+import { useState } from 'react';
+import SignupForm from '../components/signupForm';
+
 
 function SignupPage() {
   // State for form-related messages or errors
@@ -15,10 +16,7 @@ function SignupPage() {
   return (
     <div>
       <h2>Signup</h2>
-      {/* Display form-related message or error */}
-      {message && <p>{message}</p>}
-      {/* Render the SignupForm component and pass the handleSubmit function */}
-      <SignupForm onSubmit={handleSubmit} />
+      <SignupForm onSubmit={handleSubmit}/>
     </div>
   );
 }

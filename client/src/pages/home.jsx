@@ -1,19 +1,18 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import customButton from 'hurdle\app.css';
-
-function HomePage() {
-  return (
+import CustomButton from '../components/customButton';
+const Home = () => {
+  return ( 
     <div>
       <h1>Welcome to Hurdle</h1>
       <p>Start messaging with people around the world</p>
-      
+      <CustomButton buttonText='Sign In'/>
+      <CustomButton buttonText='Sign Up'/>
       {/* "Start Messaging" button */}
       <Link to="/messaging">
-        <button>Start Messaging</button>
+      <CustomButton buttonText='Start Messaging'/>
       </Link>
     </div>
-  );
+   );
 }
-
-export default HomePage;
+ 
+export default Home;
