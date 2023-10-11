@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+<<<<<<< Updated upstream
+=======
+import PropTypes from 'prop-types';
+>>>>>>> Stashed changes
 import './signupForm.css';
 
 function SignupForm({ onSubmit }) {
@@ -87,6 +91,9 @@ function SignupForm({ onSubmit }) {
       <p className="signin">Already have an account? <a href="#">Signin</a></p>
     </form>
   );
+}
+SignupForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default SignupForm;
