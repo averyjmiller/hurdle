@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './signupForm.css';
 
 function SignupForm({ onSubmit }) {
   // State variables for form input fields
@@ -6,6 +7,7 @@ function SignupForm({ onSubmit }) {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   // Function to handle form submission
   const handleSubmit = (e) => {
@@ -16,60 +18,73 @@ function SignupForm({ onSubmit }) {
       lastName,
       email,
       password,
+      confirmPassword
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Form input fields */}
-      <div>
-        <label htmlFor="firstName">First Name:</label>
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
+    <form className="form" onSubmit={handleSubmit}>
+      <p className="title">Register</p>
+      <p className="message">Signup now and get full access to our app.</p>
+      <div className="flex">
+        <label>
+          <input 
+            required 
+            placeholder="" 
+            type="text" 
+            className="input" 
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <span>Firstname</span>
+        </label>
+        <label>
+          <input 
+            required 
+            placeholder="" 
+            type="text" 
+            className="input"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <span>Lastname</span>
+        </label>
       </div>
-      <div>
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
+      <label>
+        <input 
+          required 
+          placeholder="" 
+          type="email" 
+          className="input"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
         />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
+        <span>Email</span>
+      </label>
+      <label>
+        <input 
+          required 
+          placeholder="" 
+          type="password" 
+          className="input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
-      </div>
-      {/* Submit button */}
-      <div>
-        <button type="submit">Sign Up</button>
-      </div>
+        <span>Password</span>
+      </label>
+      <label>
+        <input 
+          required 
+          placeholder="" 
+          type="password" 
+          className="input"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <span>Confirm password</span>
+      </label>
+      <button className="submit">Submit</button>
+      <p className="signin">Already have an account? <a href="#">Signin</a></p>
     </form>
   );
 }

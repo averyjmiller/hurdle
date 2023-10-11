@@ -6,12 +6,13 @@ import Home from "./pages/home.jsx";
 import Profile from "./pages/profile.jsx";
 import Signup from "./pages/signup.jsx";
 import Login from "./pages/login.jsx";
+import Error from "./pages/error.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
