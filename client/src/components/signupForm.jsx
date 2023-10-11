@@ -1,8 +1,5 @@
 import { useState } from 'react';
-<<<<<<< Updated upstream
-=======
 import PropTypes from 'prop-types';
->>>>>>> Stashed changes
 import './signupForm.css';
 
 function SignupForm({ onSubmit }) {
