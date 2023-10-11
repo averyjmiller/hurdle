@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './signupForm.css';
 
 function SignupForm({ onSubmit }) {
