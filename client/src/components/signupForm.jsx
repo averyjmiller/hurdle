@@ -1,98 +1,74 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import './signupForm.css';
+import React, { useState } from 'react';
 
 function SignupForm({ onSubmit }) {
-  // State variables for form input fields
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [preferredLanguage, setPreferredLanguage] = useState('English');  // Default language
 
-  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call the callback function (onSubmit) and pass the form data
     onSubmit({
-      firstName,
-      lastName,
-      email,
+      username,
       password,
-      confirmPassword
+      preferredLanguage  // Include preferredLanguage in the form data
     });
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <p className="title">Register</p>
-      <p className="message">Signup now and get full access to our app.</p>
-      <div className="flex">
-        <label>
-          <input 
-            required 
-            placeholder="" 
-            type="text" 
-            className="input" 
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <span>Firstname</span>
-        </label>
-        <label>
-          <input 
-            required 
-            placeholder="" 
-            type="text" 
-            className="input"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <span>Lastname</span>
-        </label>
-      </div>
-      <label>
-        <input 
-          required 
-          placeholder="" 
-          type="email" 
-          className="input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
         />
-        <span>Email</span>
-      </label>
-      <label>
-        <input 
-          required 
-          placeholder="" 
-          type="password" 
-          className="input"
+      </div>
+      <div>
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <span>Password</span>
-      </label>
-      <label>
-        <input 
-          required 
-          placeholder="" 
-          type="password" 
-          className="input"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <span>Confirm password</span>
-      </label>
-      <button className="submit">Submit</button>
-      <p className="signin">Already have an account? <Link to="/login">Signin</Link></p>
+      </div>
+      <div>
+        <label htmlFor="preferredLanguage">Preferred Language:</label>
+        <select
+          id="preferredLanguage"
+          name="preferredLanguage"
+          value={preferredLanguage}
+          onChange={(e) => setPreferredLanguage(e.target.value)}
+          required
+        >
+          <option value="English">English</option>
+          <option value="Spanish">Spanish</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Hindi">Hindi</option>
+          <option value="French">French</option>
+          <option value="Arabic">Arabic</option>
+          <option value="Bengali">Bengali</option>
+          <option value="Russian">Russian</option>
+          <option value="Portuguese">Portuguese</option>
+          <option value="Indonesian">Indonesian</option>
+          <option value="Urdu">Urdu</option>
+          <option value="German">German</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Swahili">Swahili</option>
+          {/* ...add more languages as needed... */}
+        </select>
+      </div>
+      <div>
+        <button type="submit">Sign Up</button>
+      </div>
     </form>
   );
 }
-SignupForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-}
 
 export default SignupForm;
-

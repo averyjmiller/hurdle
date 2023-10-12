@@ -1,24 +1,31 @@
-// SignupPage.jsx (Presentation Component)
-import { useState } from 'react';
-import SignupForm from '../components/signupForm';
+import React, { useState } from 'react';
+import axios from 'axios';  
+import SignupForm from './SignupForm';
 
-
-function SignupPage() {
-  // State for form-related messages or errors
+function Signup() {
   const [message, setMessage] = useState('');
 
-  // Function to handle form submission
-  const handleSubmit = (formData) => {
-    // Perform form submission logic, e.g., send data to the server
-    // Update message state based on the result of the submission
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await axios.post('/api/signup', formData);
+      if (response.data.success) {
+        setMessage('Signup successful!');
+      } else {
+        setMessage('Signup failed: ' + response.data.error);
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      setMessage('An error occurred during signup.');
+    }
   };
 
   return (
     <div>
       <h2>Signup</h2>
-      <SignupForm onSubmit={handleSubmit}/>
+      {message && <p>{message}</p>}
+      <SignupForm onSubmit={handleSubmit} />
     </div>
   );
 }
 
-export default SignupPage;
+export default Signup;
