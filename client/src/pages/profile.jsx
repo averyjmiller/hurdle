@@ -7,7 +7,7 @@ function Profile() {
 
             {/* Profile Image */}
             <div className="profile-image-container">
-                {/* <img src="path_to_your_default_image.jpg" alt="Profile" className="profile-image"/> */}
+                {/* <img src="path_to_your_image.jpg" alt="Profile" className="profile-image"/> */}
             </div>
 
             {/* Profile Details */}

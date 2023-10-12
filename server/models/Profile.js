@@ -14,7 +14,7 @@ const profileSchema = new Schema({
     unique: true,
     trim: true,
     minLength: [3, "Username must have more than 3 characters!"],
-    maxLength: [15, "Usermane cannot be more than 15 characters!"],
+    maxLength: [15, "Username cannot be more than 15 characters!"],
     match: [/\S/, "Username cannot have spaces!"],
   },
   email: {
@@ -36,6 +36,19 @@ const profileSchema = new Schema({
     required: true,
   },
 });
+
+
+profileSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
+});
+
+
+profileSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const Profile = model("Profile", profileSchema);
 
