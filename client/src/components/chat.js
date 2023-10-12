@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import io from 'socket.io-client';  
+import io from 'socket.io-client';
+import PropTypes from 'prop-types';
 
 function Chat({ targetLanguage }) {  
   const [message, setMessage] = useState('');
@@ -47,6 +48,10 @@ function Chat({ targetLanguage }) {
       <p>Translated Message: {translatedMessage}</p>
     </div>
   );
+}
+
+Chat.propTypes = {
+  targetLanguage: PropTypes.string.isRequired,
 }
 
 export default Chat;  

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './signupForm.css';
 
 function SignupForm({ onSubmit }) {
@@ -84,9 +86,12 @@ function SignupForm({ onSubmit }) {
         <span>Confirm password</span>
       </label>
       <button className="submit">Submit</button>
-      <p className="signin">Already have an account? <a href="#">Signin</a></p>
+      <p className="signin">Already have an account? <Link to="/login">Signin</Link></p>
     </form>
   );
+}
+SignupForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default SignupForm;
