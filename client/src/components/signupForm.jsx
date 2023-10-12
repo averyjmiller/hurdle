@@ -1,57 +1,29 @@
 import React, { useState } from 'react';
 
 function SignupForm({ onSubmit }) {
-  // State variables for form input fields
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [preferredLanguage, setPreferredLanguage] = useState('English');  // Default language
 
-  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call the callback function (onSubmit) and pass the form data
     onSubmit({
-      firstName,
-      lastName,
-      email,
+      username,
       password,
+      preferredLanguage  // Include preferredLanguage in the form data
     });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Form input fields */}
       <div>
-        <label htmlFor="firstName">First Name:</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
-          id="firstName"
-          name="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          id="username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
       </div>
@@ -66,7 +38,32 @@ function SignupForm({ onSubmit }) {
           required
         />
       </div>
-      {/* Submit button */}
+      <div>
+        <label htmlFor="preferredLanguage">Preferred Language:</label>
+        <select
+          id="preferredLanguage"
+          name="preferredLanguage"
+          value={preferredLanguage}
+          onChange={(e) => setPreferredLanguage(e.target.value)}
+          required
+        >
+          <option value="English">English</option>
+          <option value="Spanish">Spanish</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Hindi">Hindi</option>
+          <option value="French">French</option>
+          <option value="Arabic">Arabic</option>
+          <option value="Bengali">Bengali</option>
+          <option value="Russian">Russian</option>
+          <option value="Portuguese">Portuguese</option>
+          <option value="Indonesian">Indonesian</option>
+          <option value="Urdu">Urdu</option>
+          <option value="German">German</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Swahili">Swahili</option>
+          {/* ...add more languages as needed... */}
+        </select>
+      </div>
       <div>
         <button type="submit">Sign Up</button>
       </div>
@@ -75,4 +72,3 @@ function SignupForm({ onSubmit }) {
 }
 
 export default SignupForm;
-
