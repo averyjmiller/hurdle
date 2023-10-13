@@ -14,7 +14,7 @@ const profileSchema = new Schema({
     unique: true,
     trim: true,
     minLength: [3, "Username must have more than 3 characters!"],
-    maxLength: [15, "Usermane cannot be more than 15 characters!"],
+    maxLength: [15, "Username cannot be more than 15 characters!"],
     match: [/\S/, "Username cannot have spaces!"],
   },
   email: {
@@ -37,12 +37,10 @@ const profileSchema = new Schema({
   },
 });
 
-profileSchema.pre("save", async function (next) {
-  if (this.isNew || this.isModified("password")) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+profileSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10);
   }
-
   next();
 });
 

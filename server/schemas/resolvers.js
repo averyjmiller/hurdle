@@ -23,52 +23,64 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       const profile = await Profile.findOne({ email });
 
-      if(!profile) {
-        throw AuthenticationError;
+      if (!profile) {
+        throw new AuthenticationError('Incorrect credentials');
       }
 
       const correctPw = await profile.isCorrectPassword(password);
 
-      if(!correctPw) {
-        throw AuthenticationError;
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
       }
 
       const token = signToken(profile);
       return { token, profile };
     },
 
-    updateLanguage: async (parent, { profileId, newLanguage }) => {
-      return Profile.findOneAndUpdate(
-        { _id: profileId },
-        { language: newLanguage },
-        { new: true }
-      );
+    updateLanguage: async (parent, { profileId, newLanguage }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: profileId },
+          { language: newLanguage },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
-    updatePassword: async (parent, { profileId, newPassword }) => {
-      return Profile.findOneAndUpdate(
-        { _id: profileId },
-        { password: newPassword },
-        { 
-          new: true,
-          runValidators: true
-        }
-      );
+    updatePassword: async (parent, { profileId, newPassword }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: profileId },
+          { password: newPassword },
+          { 
+            new: true,
+            runValidators: true 
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
-    updateEmail: async (parent, { profileId, newEmail }) => {
-      return Profile.findOneAndUpdate(
-        { _id: profileId },
-        { email: newEmail },
-        { 
-          new: true,
-          runValidators: true
-        }
-      );
+    updateEmail: async (parent, { profileId, newEmail }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: profileId },
+          { email: newEmail },
+          { 
+            new: true,
+            runValidators: true
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
-    removeProfile: async (parent, { profileId }) => {
-      return Profile.findOneAndDelete({ _id: profileId });
+    removeProfile: async (parent, { profileId }, context) => {
+      if (context.user) {
+        return Profile.findOneAndDelete({ _id: profileId });
+      }
+      throw new AuthenticationError('You need to be logged in!');
     }
   }
 };
