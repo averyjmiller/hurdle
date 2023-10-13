@@ -1,0 +1,42 @@
+.navbar-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #3498db; /* Set this to your desired background color */
+    z-index: 100; /* Ensures the navbar stays on top of other content */
+}
+
+.navbar {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Adjust as necessary */
+}
+
+.navbar-logo h2 {
+    margin: 0;
+}
+
+.navbar-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Space between the links */
+}
+
+.navbar-links li {
+    margin: 0;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: inherit; /* Change this if you want a specific color for links */
+}
+
+.navbar-links a:hover {
+    /* Optional: Add any hover styles for the links here */
+    text-decoration: underline;
+}
