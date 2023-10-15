@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import './signupForm.css';
 
 function SignupForm({ onSubmit }) {
   const [username, setUsername] = useState('');
@@ -15,7 +17,8 @@ function SignupForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form">
+      <div className="title">Sign Up</div>
       <div>
         <label htmlFor="username">Username:</label>
         <input
@@ -47,28 +50,18 @@ function SignupForm({ onSubmit }) {
           onChange={(e) => setPreferredLanguage(e.target.value)}
           required
         >
-          <option value="English">English</option>
-          <option value="Spanish">Spanish</option>
-          <option value="Chinese">Chinese</option>
-          <option value="Hindi">Hindi</option>
-          <option value="French">French</option>
-          <option value="Arabic">Arabic</option>
-          <option value="Bengali">Bengali</option>
-          <option value="Russian">Russian</option>
-          <option value="Portuguese">Portuguese</option>
-          <option value="Indonesian">Indonesian</option>
-          <option value="Urdu">Urdu</option>
-          <option value="German">German</option>
-          <option value="Japanese">Japanese</option>
-          <option value="Swahili">Swahili</option>
-          {/* ...add more languages as needed... */}
+          {/* ... your language options ... */}
         </select>
       </div>
       <div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="submit">Sign Up</button>
       </div>
     </form>
   );
 }
+
+SignupForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default SignupForm;
