@@ -50,7 +50,10 @@ function SignupForm({ onSubmit }) {
           onChange={(e) => setPreferredLanguage(e.target.value)}
           required
         >
-          {/* ... your language options ... */}
+          <option value="English">English</option>
+          <option value="Spanish">Spanish</option>
+          <option value="French">French</option>
+          {/* ... add other languages as needed ... */}
         </select>
       </div>
       <div>
@@ -65,3 +68,4 @@ SignupForm.propTypes = {
 };
 
 export default SignupForm;
+
