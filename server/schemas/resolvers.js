@@ -10,6 +10,13 @@ const resolvers = {
     profile: async (parent, { profileId }) => {
       return Profile.findOne({ _id: profileId });
     },
+
+    me: async(parent, args, context) => {
+      if(context.user) {
+        return Profile.findOne({ _id: context.user._id });
+      }
+      throw AuthenticationError;
+    }
   },
 
   Mutation: {
@@ -37,10 +44,10 @@ const resolvers = {
       return { token, profile };
     },
 
-    updateLanguage: async (parent, { profileId, newLanguage }, context) => {
+    updateLanguage: async (parent, { newLanguage }, context) => {
       if (context.user) {
         return Profile.findOneAndUpdate(
-          { _id: profileId },
+          { _id: context.user._id },
           { language: newLanguage },
           { new: true }
         );
@@ -48,10 +55,10 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    updatePassword: async (parent, { profileId, newPassword }, context) => {
+    updatePassword: async (parent, { newPassword }, context) => {
       if (context.user) {
         return Profile.findOneAndUpdate(
-          { _id: profileId },
+          { _id: context.user._id },
           { password: newPassword },
           { 
             new: true,
@@ -62,10 +69,10 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    updateEmail: async (parent, { profileId, newEmail }, context) => {
+    updateEmail: async (parent, { newEmail }, context) => {
       if (context.user) {
         return Profile.findOneAndUpdate(
-          { _id: profileId },
+          { _id: context.user._id },
           { email: newEmail },
           { 
             new: true,
@@ -76,9 +83,9 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    removeProfile: async (parent, { profileId }, context) => {
+    removeProfile: async (parent, args, context) => {
       if (context.user) {
-        return Profile.findOneAndDelete({ _id: profileId });
+        return Profile.findOneAndDelete({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
     }
