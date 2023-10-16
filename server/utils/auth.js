@@ -1,9 +1,8 @@
-const jwt = require('jsonwebtoken');
 const { GraphQLError } = require('graphql');
-
+const jwt = require('jsonwebtoken');
 
 const secret = process.env.JWT_SECRET || 'mysecretssshhhhhhh';
-const expiration = '14d';
+const expiration = '2h';
 
 module.exports = {
   AuthenticationError: new GraphQLError('Could not authenticate user.', {
@@ -11,32 +10,32 @@ module.exports = {
       code: 'UNAUTHENTICATED',
     },
   }),
-  
+  authMiddleware: function ({ req }) {
+    // allows token to be sent via req.body, req.query, or headers
+    let token = req.body.token || req.query.token || req.headers.authorization;
+
+    // We split the token string into an array and return actual token
+    if (req.headers.authorization) {
+      token = token.split(' ').pop().trim();
+    }
+
+    if (!token) {
+      return req;
+    }
+
+    // if token can be verified, add the decoded user's data to the request so it can be accessed in the resolver
+    try {
+      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      req.user = data;
+    } catch {
+      console.log('Invalid token');
+    }
+
+    // return the request object so it can be passed to the resolver as `context`
+    return req;
+  },
   signToken: function ({ email, name, _id }) {
     const payload = { email, name, _id };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
-  
-  authenticateToken: (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1]; // Bearer Token
-    
-    if (!token) {
-      return res.status(401).json({ message: 'Authentication failed: No token provided.' });
-    }
-
-    try {
-      const { data } = jwt.verify(token, secret);
-      req.user = data;
-      next();
-    } catch (err) {
-      return res.status(401).json({ message: 'Authentication failed: Invalid token.' });
-    }
-  },
-  
-  // Optionally: Middleware to check if user is authenticated in GraphQL resolvers
-  checkUserIsAuthenticated: (context) => {
-    if (!context.req.user) {
-      throw new GraphQLError('You must be logged in.');
-    }
-  }
 };
