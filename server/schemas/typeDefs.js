@@ -15,16 +15,17 @@ const typeDefs = `
   type Query {
     profiles: [Profile]!
     profile(profileId: ID!): Profile
+    me: Profile
   }
 
   type Mutation {
     addProfile(name: String!, username: String!, email: String!, password: String!, language: String!): Auth
     login(email: String!, password: String!): Auth
 
-    updateLanguage(profileId: ID!, newLanguage: String!): Profile
-    updatePassword(profileId: ID!, newPassword: String!): Profile
-    updateEmail(profileId: ID!, newEmail: String!): Profile
-    removeProfile(profileId: ID!): Profile
+    updateLanguage(newLanguage: String!): Profile
+    updatePassword(newPassword: String!): Profile
+    updateEmail(newEmail: String!): Profile
+    removeProfile: Profile
   }
 `;
 
