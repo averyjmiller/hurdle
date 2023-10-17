@@ -1,7 +1,12 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
+import Auth from '../utils/auth';
 
 const Navbar = () => {
+  const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+  };    
   return (
     <div className="navbar-container">
       <header>
@@ -19,6 +24,14 @@ const Navbar = () => {
             <li>
               <Link to="/about">About Us</Link>
             </li>
+            <li>
+              {Auth.loggedIn() ? (
+                <>
+                  <button onClick={logout}>Logout</button>
+                </>
+               ) : (
+                <></>
+               )}
           </ul>
         </nav>
       </header>

@@ -2,14 +2,12 @@ import { gql } from "@apollo/client";
 
 export const ADD_PROFILE = gql`
   mutation addProfile(
-    $name: String!,
     $username: String!,
     $email: String!,
     $password: String!,
     $language: String!
   ) {
     addProfile(
-      name: $name,
       username: $username,
       email: $email,
       password: $password,
@@ -18,7 +16,7 @@ export const ADD_PROFILE = gql`
       token
       profile {
         _id
-        name
+        username
       }
     }
   }
@@ -30,62 +28,38 @@ export const LOGIN_USER = gql`
       token
       profile {
         _id
-        name
+        username
       }
     }
   }
 `;
 
 export const UPDATE_LANGUAGE = gql`
-
-  mutation updateLanguage($profileId: ID!, $newLanguage: String!) {
-    updateLanguage(profileID: $profileId, newLanguage: $newLanguage) {
-      profile {
-        _id
-        name
-        language
-      }
+  mutation updateLanguage($newLanguage: String!) {
+    updateLanguage(newLanguage: $language) {
+      _id
+      username
+      language
     }
   }
 `;
 
 export const UPDATE_PASSWORD = gql`
-  mutation updatePassword($profileId: ID!, $newPassword: String!) {
-    updatePassword(profileID: $profileId, newPassword: $newPassword) {
-      profile {
-        _id
-        name
-        password
-      }
-
+  mutation updatePassword($newPassword: String!) {
+    updatePassword(newPassword: $password) {
+      _id
+      username
+      password
     }
   }
 `;
 
 export const UPDATE_EMAIL = gql`
-
-  mutation updateEmail($profileId: ID!, $newEmail: String!) {
-    updateEmail(profileID: $profileId, newEmail: $newEmail) {
-      profile {
-        _id
-        name
-        email
-      }
-    }
-  }
-`;
-
-export const REMOVE_PROFILE = gql`
-  mutation removeProfile($profileId: ID!) {
-    removeProfile(profileID: $profileId) {
-      profile {
-        _id
-        name
-        username
-        email
-        password
-        language
-      }
+  mutation updateEmail($newEmail: String!) {
+    updateEmail(newEmail: $email) {
+      _id
+      username
+      email
     }
   }
 `;
