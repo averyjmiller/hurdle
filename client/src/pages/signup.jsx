@@ -2,10 +2,12 @@ import { useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { ADD_PROFILE } from '../utils/mutations';
+
 import Auth from '../utils/auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
+    email: '',
     username: '',
     password: '',
     language: '',
@@ -48,6 +50,16 @@ const Signup = () => {
         </p>
       ) : (
       <form onSubmit={handleFormSubmit}>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={formState.email}
+            onChange={handleChange}
+          />
+        </div>
         <div>
           <label htmlFor="username">Username:</label>
           <input

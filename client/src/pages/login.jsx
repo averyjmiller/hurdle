@@ -44,20 +44,45 @@ const Login = (props) => {
 
   return (
     <div>
-      <h1>Signin Page</h1>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Sign In</button>
+      <h1>Login!</h1>
+        {data ? (
+          <p>
+            Success! You may now head{' '}
+            <Link to="/">back to the homepage.</Link>
+          </p>
+        ) : (
+          <form onSubmit={handleFormSubmit}>
+            <input
+              type="text"
+              placeholder="Email"            
+              name="email"
+              value={formState.email}
+              onChange={handleChange}
+            />
+            <input
+              placeholder="Password"
+              name="password"
+              type="password"
+              value={formState.password}
+              onChange={handleChange}
+            />
+            <button
+              style={{ cursor: 'pointer' }}
+              type="submit"
+            >
+              Sign In
+            </button>
+          </form>
+        )}
+
+        {error && (
+          <div className="my-3 p-3 bg-danger text-white">
+            {error.message}
+          </div>
+        )}
+      <Link to="/signup">
+      <p>Create an account</p>
+      </Link>
     </div>
   );
 }
