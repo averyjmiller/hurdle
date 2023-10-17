@@ -16,11 +16,11 @@ const Navbar = () => {
                     </div>
                     <ul className="navbar-links">
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/profiles/:profileId">Account</Link></li>
                         <li><Link to="/aboutUs">About Us</Link></li>
                         {Auth.loggedIn() ? (
                             <>
-                            <button onClick={logout}>Logout</button>
+                            <li><Link to="/profile">Account</Link></li>
+                            <button onClick={logout}>Log Out</button>
                             </>
                         ) : (
                             <></>
