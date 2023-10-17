@@ -1,48 +1,90 @@
-import { Link } from "react-router-dom";
-import "./login.css";
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations'; // Import your LOGIN_USER mutation
+import { LOGIN_USER } from '../utils/mutations';
 
-function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+import Auth from '../utils/auth';
 
-  const [login] = useMutation(LOGIN_USER);
+import './login.css';
 
-  const handleLogin = async () => {
+const Login = (props) => {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
     try {
-      const { data } = await login({ variables: { email, password } });
-      if (data.login.token) {
-        localStorage.setItem('token', data.login.token);
-        setIsLoggedIn(true);
-      }
-    } catch (err) {
-      console.error("Login error:", err);
+      const { data } = await login({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
     }
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
 
   return (
     <div>
-      <h1>Signin Page</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Sign In</button>
-      {isLoggedIn && <Link to="/messaging">Go to Messaging</Link>}
+      <h1>Login!</h1>
+        {data ? (
+          <p>
+            Success! You may now head{' '}
+            <Link to="/">back to the homepage.</Link>
+          </p>
+        ) : (
+          <form onSubmit={handleFormSubmit}>
+            <input
+              type="text"
+              placeholder="Email"            
+              name="email"
+              value={formState.email}
+              onChange={handleChange}
+            />
+            <input
+              placeholder="Password"
+              name="password"
+              type="password"
+              value={formState.password}
+              onChange={handleChange}
+            />
+            <button
+              style={{ cursor: 'pointer' }}
+              type="submit"
+            >
+              Sign In
+            </button>
+          </form>
+        )}
+
+        {error && (
+          <div className="my-3 p-3 bg-danger text-white">
+            {error.message}
+          </div>
+        )}
+      <Link to="/signup">
+      <p>Create an account</p>
+      </Link>
     </div>
   );
 }
 
-export default LoginPage;
+export default Login;

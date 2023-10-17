@@ -6,7 +6,7 @@ const Home = () => {
     <div>
       <h1>Welcome to Hurdle</h1>
       <p>Start messaging with people around the world</p>
-      <Link to="/signup">
+      <Link to="/login">
       <CustomButton buttonText='Start Messaging'/>
       </Link>
     </div>
