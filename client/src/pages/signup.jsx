@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_PROFILE } from '../utils/mutations';  // Adjust the path
 import SignupForm from '../components/signupForm';
+import { Link } from 'react-router-dom';
 
 function Signup() {
   const [message, setMessage] = useState("");
@@ -35,6 +36,7 @@ function Signup() {
       <h2>Signup</h2>
       {message && <p>{message}</p>}
       <SignupForm onSubmit={handleSubmit} />
+      <p>Already have an account? <Link to="/login">Login here</Link></p>
     </div>
   );
 }
