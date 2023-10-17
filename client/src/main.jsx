@@ -8,6 +8,7 @@ import Signup from "./pages/signup.jsx";
 import Login from "./pages/login.jsx";
 import Error from "./pages/error.jsx";
 import Messaging from "./pages/messaging.jsx";
+import About from "./pages/about.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       {
         path: "/messaging",
         element: <Messaging />,
-      }
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
     ],
   },
 ]);
