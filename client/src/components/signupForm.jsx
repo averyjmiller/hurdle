@@ -10,15 +10,28 @@ function SignupForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({
+      email,
       username,
       password,
       preferredLanguage  // Include preferredLanguage in the form data
     });
   };
+  const [email, setEmail] = useState('');
 
   return (
     <form onSubmit={handleSubmit} className="form">
       <div className="title">Sign Up</div>
+      <div>
+        <label htmlFor="email">Email Address:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          />
+      </div> 
       <div>
         <label htmlFor="username">Username:</label>
         <input

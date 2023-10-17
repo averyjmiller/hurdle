@@ -37,31 +37,55 @@ export const LOGIN_USER = gql`
 `;
 
 export const UPDATE_LANGUAGE = gql`
-  mutation updateLanguage($newLanguage: String!) {
-    updateLanguage(newLanguage: $language) {
-      _id
-      name
-      language
+
+  mutation updateLanguage($profileId: ID!, $newLanguage: String!) {
+    updateLanguage(profileID: $profileId, newLanguage: $newLanguage) {
+      profile {
+        _id
+        name
+        language
+      }
     }
   }
 `;
 
 export const UPDATE_PASSWORD = gql`
-  mutation updatePassword($newPassword: String!) {
-    updatePassword(newPassword: $password) {
-      _id
-      name
-      password
+  mutation updatePassword($profileId: ID!, $newPassword: String!) {
+    updatePassword(profileID: $profileId, newPassword: $newPassword) {
+      profile {
+        _id
+        name
+        password
+      }
+
     }
   }
 `;
 
 export const UPDATE_EMAIL = gql`
-  mutation updateEmail($newEmail: String!) {
-    updateEmail(newEmail: $email) {
-      _id
-      name
-      email
+
+  mutation updateEmail($profileId: ID!, $newEmail: String!) {
+    updateEmail(profileID: $profileId, newEmail: $newEmail) {
+      profile {
+        _id
+        name
+        email
+      }
+    }
+  }
+`;
+
+export const REMOVE_PROFILE = gql`
+  mutation removeProfile($profileId: ID!) {
+    removeProfile(profileID: $profileId) {
+      profile {
+        _id
+        name
+        username
+        email
+        password
+        language
+      }
     }
   }
 `;
