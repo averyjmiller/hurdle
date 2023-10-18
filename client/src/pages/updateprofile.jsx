@@ -62,9 +62,7 @@ const UpdateProfile = () => {
   return (
     <div>
       <div>
-        <h1 className="text-primary">Edit Profile</h1>
-
-        <h3>Personal info</h3>
+        <h1 className="text-primary">Update Profile</h1>
 
         <form
           onSubmit={handleFormSubmit}
@@ -137,6 +135,13 @@ const UpdateProfile = () => {
               </div>
             </div>
           </div>
+          <button
+            className="btn btn-block btn-info"
+            style={{ cursor: "pointer" }}
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>
