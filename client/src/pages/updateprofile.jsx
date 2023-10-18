@@ -77,6 +77,7 @@ const UpdateProfile = () => {
               <input
                 className="form-control"
                 type="text"
+                name="username"
                 value={formState.username}
                 onChange={handleChange}
               />
@@ -88,6 +89,7 @@ const UpdateProfile = () => {
               <input
                 className="form-control"
                 type="text"
+                name="email"
                 value={formState.email}
                 onChange={handleChange}
               />
@@ -99,6 +101,7 @@ const UpdateProfile = () => {
               <input
                 className="form-control"
                 type="text"
+                name="password"
                 value={formState.password}
                 onChange={handleChange}
               />
@@ -112,17 +115,24 @@ const UpdateProfile = () => {
                 <select
                   id="user_time_zone"
                   className="form-control"
+                  name="language"
                   value={formState.language}
                   onChange={handleChange}
                 >
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
+                  <option value="English">English</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="Chinese">Chinese</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="French">French</option>
+                  <option value="Arabic">Arabic</option>
+                  <option value="Bengali">Bengali</option>
+                  <option value="Russian">Russian</option>
+                  <option value="Portuguese">Portuguese</option>
+                  <option value="Indonesian">Indonesian</option>
+                  <option value="Urdu">Urdu</option>
+                  <option value="German">German</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Swahili">Swahili</option>
                 </select>
               </div>
             </div>
