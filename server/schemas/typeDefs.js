@@ -24,6 +24,7 @@ const typeDefs = `
     updateLanguage(newLanguage: String!): Profile
     updatePassword(newPassword: String!): Profile
     updateEmail(newEmail: String!): Profile
+    updateUsername(newUsername: String!): Profile
     removeProfile: Profile
   }
 `;
