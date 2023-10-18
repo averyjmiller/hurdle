@@ -1,6 +1,8 @@
 const express = require('express');
+
 // const http = require('http');
-// const { Server } = require('socket.io');
+const { Server } = require('socket.io');
+
 const path = require('path');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -9,14 +11,16 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
-// const translateController = require('./controllers/translateController');
-// const userRoutes = require('./routes/userRoutes');
-// const chatHandler = require('./socketHandlers/chatHandler');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const translateController = require('./controllers/translateController');
+const userRoutes = require('./routes/userRoutes');
+const chatHandler = require('./socketHandlers/chatHandler');
+
 const app = express();
+
 // const httpServer = http.createServer(app);
-// const io = new Server(httpServer);
+
 const PORT = process.env.PORT || 3001;
 require('dotenv').config();
 
@@ -25,13 +29,22 @@ const server = new ApolloServer({
   resolvers,
 });
 
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3001',
+    methods: ['GET', 'POST'],
+  },
+});
+
 const startApolloServer = async () => {
   await server.start();
 
-  // app.use(cors());
+  app.use(cors());
+
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-  // app.use(bodyParser.json());
+
+  app.use(bodyParser.json());
 
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
@@ -57,10 +70,10 @@ const startApolloServer = async () => {
 startApolloServer();
 
 
-// app.use('/api', userRoutes); 
-// app.post('/translate', translateController.translateText);
+app.use('/api', userRoutes); 
+app.post('/translate', translateController.translateText);
 
-// io.on('connection', (socket) => chatHandler(io, socket));
+io.on('connection', (socket) => chatHandler(io, socket));
 
 
 // const startServer = async () => {
