@@ -36,7 +36,7 @@ export const LOGIN_USER = gql`
 
 export const UPDATE_LANGUAGE = gql`
   mutation updateLanguage($newLanguage: String!) {
-    updateLanguage(newLanguage: $language) {
+    updateLanguage(language: $newLanguage) {
       _id
       username
       language
@@ -46,7 +46,7 @@ export const UPDATE_LANGUAGE = gql`
 
 export const UPDATE_PASSWORD = gql`
   mutation updatePassword($newPassword: String!) {
-    updatePassword(newPassword: $password) {
+    updatePassword(password: $newPassword) {
       _id
       username
       password
@@ -56,7 +56,7 @@ export const UPDATE_PASSWORD = gql`
 
 export const UPDATE_EMAIL = gql`
   mutation updateEmail($newEmail: String!) {
-    updateEmail(newEmail: $email) {
+    updateEmail(email: $newEmail) {
       _id
       username
       email
@@ -66,7 +66,7 @@ export const UPDATE_EMAIL = gql`
 
 export const UPDATE_USERNAME = gql`
   mutation updateUsername($newUsername: String!) {
-    updateUsername(newUsername: $username) {
+    updateUsername(username: $newUsername) {
       _id
       username
     }
