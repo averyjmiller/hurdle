@@ -9,6 +9,7 @@ import Login from "./pages/login.jsx";
 import Error from "./pages/error.jsx";
 import Messaging from "./pages/messaging.jsx";
 import About from "./pages/about.jsx";
+import UpdateProfile from "./pages/updateprofile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/updateprofile",
+        element: <UpdateProfile />,
       },
     ],
   },
